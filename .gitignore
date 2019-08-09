@@ -1,0 +1,7 @@
+/.idea
+/composer.lock
+/vendor
+/.phpunit*
+/tests/_output
+/tests/_reports
+/build

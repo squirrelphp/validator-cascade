@@ -1,0 +1,59 @@
+{
+    "name": "squirrelphp/validator-cascade",
+    "type": "library",
+    "description": "Cascade annotation for Symfony Validator annotation, reimplementing the Valid constraint in a more flexible and understandable way",
+    "keywords": [
+        "php",
+        "symfony",
+        "validator",
+        "form",
+        "valid",
+        "cascade"
+    ],
+    "homepage": "https://github.com/squirrelphp/validator-cascade",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Andreas Leathley",
+            "email": "andreas.leathley@panaxis.ch"
+        }
+    ],
+    "require": {
+        "php": "^7.2",
+        "symfony/validator": "^4.0",
+        "doctrine/annotations": "^1.6"
+    },
+    "require-dev": {
+        "captainhook/plugin-composer": "^4.0",
+        "diablomedia/phpunit-pretty-printer": "^4.0",
+        "mockery/mockery": "^1.0",
+        "phpstan/phpstan": "^0.11.5",
+        "phpunit/phpunit": "^8.0",
+        "slevomat/coding-standard": "^5.0",
+        "squizlabs/php_codesniffer": "^3.2",
+        "vimeo/psalm": "^3.2"
+    },
+    "config": {
+        "sort-packages": false
+    },
+    "autoload": {
+        "psr-4": {
+            "Squirrel\\ValidatorCascade\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Squirrel\\ValidatorCascade\\Tests\\": "tests/",
+            "Squirrel\\ValidatorCascade\\Examples\\": "examples/"
+        }
+    },
+    "scripts": {
+        "phpstan": "vendor/bin/phpstan analyse src --level=7",
+        "psalm": "vendor/bin/psalm --show-info=false",
+        "psalm_base": "vendor/bin/psalm --set-baseline=psalm-baseline.xml",
+        "phpunit": "vendor/bin/phpunit --colors=always",
+        "phpcs": "vendor/bin/phpcs --standard=ruleset.xml --extensions=php --cache src tests",
+        "phpcsfix": "vendor/bin/phpcbf --standard=ruleset.xml --extensions=php --cache src tests",
+        "codecoverage": "vendor/bin/phpunit --coverage-html tests/_reports"
+    }
+}
