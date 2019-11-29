@@ -20,18 +20,13 @@
     ],
     "require": {
         "php": "^7.2",
-        "symfony/validator": "^4.0",
+        "symfony/validator": "^4.0|^5.0",
         "doctrine/annotations": "^1.6"
     },
     "require-dev": {
+        "bamarni/composer-bin-plugin": "^1.3",
         "captainhook/plugin-composer": "^4.0",
-        "diablomedia/phpunit-pretty-printer": "^4.0",
-        "mockery/mockery": "^1.0",
-        "phpstan/phpstan": "^0.11.5",
-        "phpunit/phpunit": "^8.0",
-        "slevomat/coding-standard": "^5.0",
-        "squizlabs/php_codesniffer": "^3.2",
-        "vimeo/psalm": "^3.2"
+        "mockery/mockery": "^1.0"
     },
     "config": {
         "sort-packages": false
@@ -48,6 +43,9 @@
         }
     },
     "scripts": {
+        "bin": "echo 'bin not installed'",
+        "post-install-cmd": ["@composer bin all install --ansi"],
+        "post-update-cmd": ["@composer bin all update --ansi"],
         "phpstan": "vendor/bin/phpstan analyse src --level=7",
         "psalm": "vendor/bin/psalm --show-info=false",
         "psalm_base": "vendor/bin/psalm --set-baseline=psalm-baseline.xml",

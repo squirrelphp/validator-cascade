@@ -1,6 +1,7 @@
 /.idea
 /composer.lock
 /vendor
+/vendor-bin/**/vendor
 /.phpunit*
 /tests/_output
 /tests/_reports
