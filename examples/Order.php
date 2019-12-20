@@ -17,6 +17,8 @@ class Order
      * @Assert\NotNull()
      * @Assert\Type(type="Squirrel\ValidatorCascade\Examples\Address")
      * @Cascade(trigger={"Default", "phoneNumberMandatory"})
+     *
+     * @var Address
      */
     public $shippingAddress;
 
@@ -30,6 +32,8 @@ class Order
      * @Assert\NotNull()
      * @Assert\Type(type="Squirrel\ValidatorCascade\Examples\Address")
      * @Cascade(groups="alternateInvoiceAddress")
+     *
+     * @var Address
      */
     public $invoiceAddress;
 
@@ -40,6 +44,8 @@ class Order
      * @Assert\NotNull()
      * @Assert\Type(type="Squirrel\ValidatorCascade\Examples\Address")
      * @Cascade(trigger="phoneNumberMandatory")
+     *
+     * @var Address
      */
     public $phoneNumberOnlyAddress;
 }

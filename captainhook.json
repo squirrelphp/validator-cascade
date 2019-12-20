@@ -25,22 +25,22 @@
                 "conditions": []
             },
             {
-                "action": "vendor/bin/phpunit",
+                "action": "composer phpunit",
                 "options": [],
                 "conditions": []
             },
             {
-                "action": "vendor/bin/phpstan analyse src --level=7",
+                "action": "composer phpstan",
                 "options": [],
                 "conditions": []
             },
             {
-                "action": "vendor/bin/psalm",
+                "action": "composer psalm",
                 "options": [],
                 "conditions": []
             },
             {
-                "action": "vendor/bin/phpcs --standard=ruleset.xml --extensions=php --cache src tests",
+                "action": "composer phpcs",
                 "options": [],
                 "conditions": []
             }

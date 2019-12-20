@@ -43,15 +43,18 @@
         }
     },
     "scripts": {
-        "bin": "echo 'bin not installed'",
         "post-install-cmd": ["@composer bin all install --ansi"],
         "post-update-cmd": ["@composer bin all update --ansi"],
-        "phpstan": "vendor/bin/phpstan analyse src --level=7",
+        "phpstan": "vendor/bin/phpstan analyse",
+        "phpstan_base": "vendor/bin/phpstan analyse --configuration phpstan_base.neon --error-format baselineNeon > phpstan-baseline.neon",
         "psalm": "vendor/bin/psalm --show-info=false",
         "psalm_base": "vendor/bin/psalm --set-baseline=psalm-baseline.xml",
         "phpunit": "vendor/bin/phpunit --colors=always",
+        "phpunit_clover": "vendor/bin/phpunit --coverage-text --coverage-clover build/logs/clover.xml",
         "phpcs": "vendor/bin/phpcs --standard=ruleset.xml --extensions=php --cache src tests",
         "phpcsfix": "vendor/bin/phpcbf --standard=ruleset.xml --extensions=php --cache src tests",
-        "codecoverage": "vendor/bin/phpunit --coverage-html tests/_reports"
+        "codecoverage": "vendor/bin/phpunit --coverage-html tests/_reports",
+        "binupdate": "@composer bin all update --ansi",
+        "bininstall": "@composer bin all install --ansi"
     }
 }
