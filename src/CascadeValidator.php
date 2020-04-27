@@ -11,7 +11,7 @@ class CascadeValidator extends ConstraintValidator
     public function validate($value, Constraint $constraint): void
     {
         if (!$constraint instanceof Cascade) {
-            throw new UnexpectedTypeException($constraint, __NAMESPACE__.'\Cascade');
+            throw new UnexpectedTypeException($constraint, __NAMESPACE__ . '\Cascade');
         }
 
         // Ignore null values, as there is nothing to cascade validation to

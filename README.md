@@ -1,17 +1,17 @@
 Squirrel Validator Cascade
 ==========================
 
-[![Build Status](https://img.shields.io/travis/com/squirrelphp/validator-cascade.svg)](https://travis-ci.com/squirrelphp/validator-cascade) [![Test Coverage](https://api.codeclimate.com/v1/badges/e056be025c6db0eb31f1/test_coverage)](https://codeclimate.com/github/squirrelphp/validator-cascade/test_coverage) ![PHPStan](https://img.shields.io/badge/style-level%207-success.svg?style=flat-round&label=phpstan) [![Packagist Version](https://img.shields.io/packagist/v/squirrelphp/validator-cascade.svg?style=flat-round)](https://packagist.org/packages/squirrelphp/validator-cascade)  [![PHP Version](https://img.shields.io/packagist/php-v/squirrelphp/validator-cascade.svg)](https://packagist.org/packages/squirrelphp/validator-cascade) [![Software License](https://img.shields.io/badge/license-MIT-success.svg?style=flat-round)](LICENSE)
+[![Build Status](https://img.shields.io/travis/com/squirrelphp/validator-cascade.svg)](https://travis-ci.com/squirrelphp/validator-cascade) [![Test Coverage](https://api.codeclimate.com/v1/badges/e056be025c6db0eb31f1/test_coverage)](https://codeclimate.com/github/squirrelphp/validator-cascade/test_coverage) ![PHPStan](https://img.shields.io/badge/style-level%208-success.svg?style=flat-round&label=phpstan) [![Packagist Version](https://img.shields.io/packagist/v/squirrelphp/validator-cascade.svg?style=flat-round)](https://packagist.org/packages/squirrelphp/validator-cascade)  [![PHP Version](https://img.shields.io/packagist/php-v/squirrelphp/validator-cascade.svg)](https://packagist.org/packages/squirrelphp/validator-cascade) [![Software License](https://img.shields.io/badge/license-MIT-success.svg?style=flat-round)](LICENSE)
 
 Reimplements the `Valid` constraint in the Symfony validator component as `Cascade` annotation which is more straightforward to use than `Valid` and has no surprising behavior.
 
-This component is compatible with the Symfony validator component starting from version 4.0 and will be adapted to support future versions of Symfony if necessary.
+This component is compatible with the Symfony validator component in versions 4.0+ and 5.0+ and will be adapted to support future versions of Symfony (if any changes are necessary for that).
 
 Installation
 ------------
 
     composer require squirrelphp/validator-cascade
-    
+
 Table of contents
 -----------------
 
