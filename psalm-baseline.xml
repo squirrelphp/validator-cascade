@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<files psalm-version="3.11.2@d470903722cfcbc1cd04744c5491d3e6d13ec3d9">
+<files psalm-version="3.18.2@19aa905f7c3c7350569999a93c40ae91ae4e1626">
   <file src="examples/Address.php">
-    <MissingConstructor occurrences="1">
+    <MissingConstructor occurrences="3">
+      <code>$city</code>
+      <code>$phoneNumber</code>
       <code>$street</code>
     </MissingConstructor>
   </file>
   <file src="examples/Order.php">
-    <MissingConstructor occurrences="1">
+    <MissingConstructor occurrences="3">
+      <code>$invoiceAddress</code>
+      <code>$phoneNumberOnlyAddress</code>
       <code>$shippingAddress</code>
     </MissingConstructor>
   </file>
