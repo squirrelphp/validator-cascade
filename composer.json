@@ -30,10 +30,7 @@
         "mockery/mockery": "^1.0"
     },
     "config": {
-        "sort-packages": false,
-        "platform": {
-            "php": "7.2.5"
-        }
+        "sort-packages": false
     },
     "autoload": {
         "psr-4": {
@@ -48,10 +45,10 @@
     },
     "scripts": {
         "phpstan": "vendor/bin/phpstan analyse",
+        "phpstan_full": "vendor/bin/phpstan clear-result-cache && vendor/bin/phpstan analyse",
         "phpstan_base": "vendor/bin/phpstan analyse --generate-baseline",
-        "phpstan_clear": "vendor/bin/phpstan clear-result-cache",
         "psalm": "vendor/bin/psalm --show-info=false",
-        "psalm_full": "vendor/bin/psalm --show-info=false",
+        "psalm_full": "vendor/bin/psalm --clear-cache && vendor/bin/psalm --show-info=false",
         "psalm_base": "vendor/bin/psalm --set-baseline=psalm-baseline.xml",
         "phpunit": "vendor/bin/phpunit --colors=always",
         "phpunit_clover": "vendor/bin/phpunit --coverage-text --coverage-clover build/logs/clover.xml",
