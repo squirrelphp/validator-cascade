@@ -6,12 +6,40 @@ use Symfony\Component\Validator\Constraint;
 
 /**
  * @Annotation
- * @Target({"PROPERTY", "METHOD", "ANNOTATION"})
+ * @Target({"PROPERTY", "METHOD"})
  */
+#[\Attribute(\Attribute::TARGET_PROPERTY | \Attribute::TARGET_METHOD)]
 class Cascade extends Constraint
 {
     /**
-     * @var mixed Which validation groups to trigger in any child objects, can be array or string
+     * @var array Which validation groups to trigger in any child objects
      */
-    public $trigger = [Constraint::DEFAULT_GROUP];
+    private array $trigger = [Constraint::DEFAULT_GROUP];
+
+    /**
+     * @param array|null $options
+     * @param string[] $groups
+     * @param string[] $trigger
+     */
+    public function __construct(
+        $options = null,
+        array $groups = [Constraint::DEFAULT_GROUP],
+        array $trigger = [Constraint::DEFAULT_GROUP]
+    ) {
+        if (isset($options['groups'])) {
+            $groups = $options['groups'];
+        }
+
+        if (isset($options['trigger'])) {
+            $trigger = $options['trigger'];
+        }
+
+        $this->groups = $groups;
+        $this->trigger = $trigger;
+    }
+
+    public function getTrigger(): array
+    {
+        return $this->trigger;
+    }
 }

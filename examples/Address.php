@@ -40,5 +40,8 @@ class Address
      *
      * @var string
      */
+    #[Assert\NotNull(groups: ['phoneNumberMandatory'])]
+    #[Assert\NotBlank(groups: ['phoneNumberMandatory'])]
+    #[Assert\Length(min: 1, max: 50)]
     public $phoneNumber;
 }

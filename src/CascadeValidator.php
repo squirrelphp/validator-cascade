@@ -19,19 +19,9 @@ class CascadeValidator extends ConstraintValidator
             return;
         }
 
-        // Convert string to array if a string was given for trigger validation groups
-        if (\is_string($constraint->trigger)) {
-            $constraint->trigger = [$constraint->trigger];
-        }
-
-        // At this point we require an array, otherwise something went wrong
-        if (!\is_array($constraint->trigger)) {
-            throw new UnexpectedTypeException($constraint->trigger, 'array|string');
-        }
-
         $this->context
             ->getValidator()
             ->inContext($this->context)
-            ->validate($value, null, $constraint->trigger);
+            ->validate($value, null, $constraint->getTrigger());
     }
 }
