@@ -14,7 +14,7 @@ class Cascade extends Constraint
     /**
      * @var array Which validation groups to trigger in any child objects
      */
-    private array $trigger = [Constraint::DEFAULT_GROUP];
+    protected array $trigger = [Constraint::DEFAULT_GROUP];
 
     /**
      * @param array|null $options
