@@ -8,7 +8,7 @@ use Symfony\Component\Validator\Exception\UnexpectedTypeException;
 
 class CascadeValidator extends ConstraintValidator
 {
-    public function validate($value, Constraint $constraint): void
+    public function validate(mixed $value, Constraint $constraint): void
     {
         if (!$constraint instanceof Cascade) {
             throw new UnexpectedTypeException($constraint, __NAMESPACE__ . '\Cascade');
@@ -22,6 +22,6 @@ class CascadeValidator extends ConstraintValidator
         $this->context
             ->getValidator()
             ->inContext($this->context)
-            ->validate($value, null, $constraint->getTrigger());
+            ->validate($value, groups: $constraint->getTrigger());
     }
 }

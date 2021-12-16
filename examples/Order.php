@@ -13,17 +13,9 @@ class Order
      *
      * Validates "Default" and "phoneNumberMandatory" validation groups
      * in $shippingAddress
-     *
-     * @Assert\NotNull()
-     * @Assert\Type(type="Squirrel\ValidatorCascade\Examples\Address")
-     * @Cascade(trigger={"Default", "phoneNumberMandatory"})
-     *
-     * @var Address
      */
-    #[Assert\NotNull()]
-    #[Assert\Type(type: 'Squirrel\ValidatorCascade\Examples\Address')]
     #[Cascade(trigger: ['Default', 'phoneNumberMandatory'])]
-    public $shippingAddress;
+    public Address $shippingAddress;
 
     /**
      * Validate $invoiceAddress only if validation group
@@ -31,24 +23,15 @@ class Order
      *
      * Validates only "Default" validation group in $invoiceAddress,
      * so phone number is optional
-     *
-     * @Assert\NotNull()
-     * @Assert\Type(type="Squirrel\ValidatorCascade\Examples\Address")
-     * @Cascade(groups={"alternateInvoiceAddress"})
-     *
-     * @var Address
      */
-    public $invoiceAddress;
+    #[Assert\NotNull(groups: ['alternateInvoiceAddress'])]
+    #[Cascade(groups: ['alternateInvoiceAddress'])]
+    public ?Address $invoiceAddress = null;
 
     /**
      * Validates only the phone number in the address, as the Default group
      * is not passed in
-     *
-     * @Assert\NotNull()
-     * @Assert\Type(type="Squirrel\ValidatorCascade\Examples\Address")
-     * @Cascade(trigger={"phoneNumberMandatory"})
-     *
-     * @var Address
      */
-    public $phoneNumberOnlyAddress;
+    #[Cascade(trigger: ['phoneNumberMandatory'])]
+    public Address $phoneNumberOnlyAddress;
 }

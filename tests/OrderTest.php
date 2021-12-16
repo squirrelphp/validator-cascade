@@ -4,24 +4,20 @@ namespace Squirrel\ValidatorCascade\Tests;
 
 use Squirrel\ValidatorCascade\Examples\Address;
 use Squirrel\ValidatorCascade\Examples\Order;
+use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Component\Validator\Constraints\NotNull;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class OrderTest extends \PHPUnit\Framework\TestCase
 {
-    /**
-     * @var ValidatorInterface
-     */
-    private $validator;
+    private ValidatorInterface $validator;
 
     protected function setUp(): void
     {
         parent::setUp();
 
-        \Doctrine\Common\Annotations\AnnotationRegistry::registerLoader('class_exists');
-        $annotationReader = new \Doctrine\Common\Annotations\AnnotationReader();
-
         $this->validator = \Symfony\Component\Validator\Validation::createValidatorBuilder()
-            ->enableAnnotationMapping($annotationReader)
+            ->enableAnnotationMapping()
             ->getValidator();
     }
 
@@ -32,40 +28,81 @@ class OrderTest extends \PHPUnit\Framework\TestCase
         $order->invoiceAddress = new Address();
         $order->phoneNumberOnlyAddress = new Address();
 
-        $additionalPHP8Violations = 0;
+        $expectedViolations = [
+            'shippingAddress.street' => Length::class,
+            'shippingAddress.city' => Length::class,
+            'shippingAddress.phoneNumber' => Length::class,
+            'phoneNumberOnlyAddress.phoneNumber' => Length::class,
+        ];
 
-        // Additional violations because of the PHP8 attributes - only affects PHP8
-        if (PHP_VERSION_ID >= 80000) {
-            $additionalPHP8Violations = 4;
+        $validationResults = $this->validator->validate($order);
+        $this->assertEquals(\count($expectedViolations), $validationResults->count());
+
+        foreach ($validationResults as $validationResult) {
+            $this->assertTrue(isset($expectedViolations[$validationResult->getPropertyPath()]));
+            $this->assertSame($expectedViolations[$validationResult->getPropertyPath()], \get_class($validationResult->getConstraint()));
+
+            unset($expectedViolations[$validationResult->getPropertyPath()]);
         }
 
-        // PHP7: Leads to six violations in $shippingAddress, none in $invoiceAddress, two in $phoneNumberOnlyAddress
-        // PHP8: Leads to eight violations in $shippingAddress, none in $invoiceAddress, four in $phoneNumberOnlyAddress
-        $this->assertEquals(8 + $additionalPHP8Violations, \count($this->validator->validate($order)));
+        $expectedViolations = [
+            'shippingAddress.street' => Length::class,
+            'shippingAddress.city' => Length::class,
+            'shippingAddress.phoneNumber' => Length::class,
+            'invoiceAddress.street' => Length::class,
+            'invoiceAddress.city' => Length::class,
+            'phoneNumberOnlyAddress.phoneNumber' => Length::class,
+        ];
 
-        // PHP7: Leads to six violations in $shippingAddress, four in $invoiceAddress, two in $phoneNumberOnlyAddress
-        // PHP8: Leads to eight violations in $shippingAddress, four in $invoiceAddress, four in $phoneNumberOnlyAddress
-        $this->assertEquals(12 + $additionalPHP8Violations, \count($this->validator->validate($order, null, ['Default', 'alternateInvoiceAddress'])));
+        $validationResults = $this->validator->validate($order, groups: ['Default', 'alternateInvoiceAddress']);
+        $this->assertEquals(\count($expectedViolations), $validationResults->count());
 
-        // Leads to no violations in $shippingAddress, four in $invoiceAddress, none in $phoneNumberOnlyAddress
-        $this->assertEquals(4, \count($this->validator->validate($order, null, ['alternateInvoiceAddress'])));
+        foreach ($validationResults as $validationResult) {
+            $this->assertTrue(isset($expectedViolations[$validationResult->getPropertyPath()]));
+            $this->assertSame($expectedViolations[$validationResult->getPropertyPath()], \get_class($validationResult->getConstraint()));
+
+            unset($expectedViolations[$validationResult->getPropertyPath()]);
+        }
+
+        $expectedViolations = [
+            'invoiceAddress.street' => Length::class,
+            'invoiceAddress.city' => Length::class,
+        ];
+
+        $validationResults = $this->validator->validate($order, groups: ['alternateInvoiceAddress']);
+        $this->assertEquals(\count($expectedViolations), $validationResults->count());
+
+        foreach ($validationResults as $validationResult) {
+            $this->assertTrue(isset($expectedViolations[$validationResult->getPropertyPath()]));
+            $this->assertSame($expectedViolations[$validationResult->getPropertyPath()], \get_class($validationResult->getConstraint()));
+
+            unset($expectedViolations[$validationResult->getPropertyPath()]);
+        }
     }
 
-    public function testWithNull()
+    public function testWithNullValue()
     {
         $order = new Order();
-        $order->shippingAddress = null;
+        $order->shippingAddress = new Address();
         $order->invoiceAddress = null;
-        $order->phoneNumberOnlyAddress = null;
+        $order->phoneNumberOnlyAddress = new Address();
 
-        $expectedViolations = 3;
+        $expectedViolations = [
+            'shippingAddress.street' => Length::class,
+            'shippingAddress.city' => Length::class,
+            'shippingAddress.phoneNumber' => Length::class,
+            'invoiceAddress' => NotNull::class,
+            'phoneNumberOnlyAddress.phoneNumber' => Length::class,
+        ];
 
-        // Additional violations because of the PHP8 attributes - only affects PHP8
-        if (PHP_VERSION_ID >= 80000) {
-            $expectedViolations = 4;
+        $validationResults = $this->validator->validate($order, groups: ['Default', 'alternateInvoiceAddress']);
+        $this->assertEquals(\count($expectedViolations), $validationResults->count());
+
+        foreach ($validationResults as $validationResult) {
+            $this->assertTrue(isset($expectedViolations[$validationResult->getPropertyPath()]));
+            $this->assertSame($expectedViolations[$validationResult->getPropertyPath()], \get_class($validationResult->getConstraint()));
+
+            unset($expectedViolations[$validationResult->getPropertyPath()]);
         }
-
-        // Leads to NotNull violations
-        $this->assertEquals($expectedViolations, \count($this->validator->validate($order)));
     }
 }
