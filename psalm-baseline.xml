@@ -1,8 +1,2 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<files psalm-version="v4.15.0@a1b5e489e6fcebe40cb804793d964e99fc347820">
-  <file src="src/Cascade.php">
-    <PropertyNotSetInConstructor occurrences="1">
-      <code>Cascade</code>
-    </PropertyNotSetInConstructor>
-  </file>
-</files>
+<files psalm-version="5.16.0@2897ba636551a8cb61601cc26f6ccfbba6c36591"/>

@@ -5,7 +5,7 @@ Squirrel Validator Cascade
 
 Reimplements the `Valid` constraint in the Symfony validator component as `Cascade` attribute which is more straightforward to use than `Valid` and has no surprising behavior.
 
-This component is compatible with the Symfony validator component in version 5.x (v2.x with annotation/attribute support) and 6.x (v3.x with only attribute support) and will be adapted to support future versions of Symfony (if any changes are necessary for that).
+This component is compatible with the Symfony validator component in version 5.x (v2.x with annotation/attribute support) and 6.x/7.x (v3.x with only attribute support) and will be adapted to support future versions of Symfony (if any changes are necessary for that).
 
 Installation
 ------------

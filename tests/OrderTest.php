@@ -17,11 +17,11 @@ class OrderTest extends \PHPUnit\Framework\TestCase
         parent::setUp();
 
         $this->validator = \Symfony\Component\Validator\Validation::createValidatorBuilder()
-            ->enableAnnotationMapping()
+            ->enableAttributeMapping()
             ->getValidator();
     }
 
-    public function testWithDifferentGroups()
+    public function testWithDifferentGroups(): void
     {
         $order = new Order();
         $order->shippingAddress = new Address();
@@ -80,7 +80,7 @@ class OrderTest extends \PHPUnit\Framework\TestCase
         }
     }
 
-    public function testWithNullValue()
+    public function testWithNullValue(): void
     {
         $order = new Order();
         $order->shippingAddress = new Address();
