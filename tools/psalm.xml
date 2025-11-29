@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<psalm
+    errorLevel="2"
+    reportMixedIssues="false"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="https://getpsalm.org/schema/config"
+    xsi:schemaLocation="https://getpsalm.org/schema/config vendor/vimeo/psalm/config.xsd"
+    errorBaseline="tools/psalm-baseline.xml"
+    findUnusedBaselineEntry="true"
+    findUnusedCode="false"
+    ensureOverrideAttribute="false"
+    autoloader="vendor/autoload.php"
+    resolveFromConfigFile="false"
+    cacheDirectory="tools/cache/psalm"
+>
+    <projectFiles>
+        <directory name="src" />
+        <directory name="tests" />
+        <ignoreFiles>
+            <directory name="vendor" />
+        </ignoreFiles>
+    </projectFiles>
+
+    <issueHandlers>
+        <ClassMustBeFinal>
+            <errorLevel type="suppress">
+                <directory name="src"/>
+                <directory name="tests"/>
+            </errorLevel>
+        </ClassMustBeFinal>
+    </issueHandlers>
+
+    <plugins>
+        <pluginClass class="Psalm\PhpUnitPlugin\Plugin"/>
+        <pluginClass class="Psalm\MockeryPlugin\Plugin"/>
+    </plugins>
+</psalm>

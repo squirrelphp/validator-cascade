@@ -8,7 +8,7 @@ use Symfony\Component\Validator\Exception\UnexpectedTypeException;
 
 class CascadeValidatorTest extends \PHPUnit\Framework\TestCase
 {
-    public function testWrongConstraint()
+    public function testWrongConstraint(): void
     {
         $this->expectException(UnexpectedTypeException::class);
 

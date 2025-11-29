@@ -40,7 +40,9 @@ class OrderTest extends \PHPUnit\Framework\TestCase
 
         foreach ($validationResults as $validationResult) {
             $this->assertTrue(isset($expectedViolations[$validationResult->getPropertyPath()]));
-            $this->assertSame($expectedViolations[$validationResult->getPropertyPath()], \get_class($validationResult->getConstraint()));
+            $constraint = $validationResult->getConstraint();
+            $this->assertNotNull($constraint);
+            $this->assertSame($expectedViolations[$validationResult->getPropertyPath()], \get_class($constraint));
 
             unset($expectedViolations[$validationResult->getPropertyPath()]);
         }
@@ -59,7 +61,9 @@ class OrderTest extends \PHPUnit\Framework\TestCase
 
         foreach ($validationResults as $validationResult) {
             $this->assertTrue(isset($expectedViolations[$validationResult->getPropertyPath()]));
-            $this->assertSame($expectedViolations[$validationResult->getPropertyPath()], \get_class($validationResult->getConstraint()));
+            $constraint = $validationResult->getConstraint();
+            $this->assertNotNull($constraint);
+            $this->assertSame($expectedViolations[$validationResult->getPropertyPath()], \get_class($constraint));
 
             unset($expectedViolations[$validationResult->getPropertyPath()]);
         }
@@ -74,7 +78,9 @@ class OrderTest extends \PHPUnit\Framework\TestCase
 
         foreach ($validationResults as $validationResult) {
             $this->assertTrue(isset($expectedViolations[$validationResult->getPropertyPath()]));
-            $this->assertSame($expectedViolations[$validationResult->getPropertyPath()], \get_class($validationResult->getConstraint()));
+            $constraint = $validationResult->getConstraint();
+            $this->assertNotNull($constraint);
+            $this->assertSame($expectedViolations[$validationResult->getPropertyPath()], \get_class($constraint));
 
             unset($expectedViolations[$validationResult->getPropertyPath()]);
         }
@@ -100,7 +106,9 @@ class OrderTest extends \PHPUnit\Framework\TestCase
 
         foreach ($validationResults as $validationResult) {
             $this->assertTrue(isset($expectedViolations[$validationResult->getPropertyPath()]));
-            $this->assertSame($expectedViolations[$validationResult->getPropertyPath()], \get_class($validationResult->getConstraint()));
+            $constraint = $validationResult->getConstraint();
+            $this->assertNotNull($constraint);
+            $this->assertSame($expectedViolations[$validationResult->getPropertyPath()], \get_class($constraint));
 
             unset($expectedViolations[$validationResult->getPropertyPath()]);
         }

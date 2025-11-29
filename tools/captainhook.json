@@ -1,11 +1,20 @@
 {
+    "config": {
+        "ansi-colors": true,
+        "run": {
+            "mode": "docker",
+            "exec": "docker compose -f docker/compose/captainhook.yml run --rm -T captainhook",
+            "path": "vendor/bin/captainhook",
+            "git": "/usr/src/app/.git"
+        }
+    },
     "commit-msg": {
         "enabled": true,
         "actions": [
             {
                 "action": "\\CaptainHook\\App\\Hook\\Message\\Action\\Beams",
                 "options": {
-                    "subjectLength": 50,
+                    "subjectLength": 72,
                     "bodyLineLength": 72
                 },
                 "conditions": []

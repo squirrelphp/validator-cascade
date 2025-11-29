@@ -11,11 +11,12 @@ class Cascade extends Constraint
         /** @var string[] For which groups to trigger this contraint (default Symfony Validator behavior) */
         array $groups = [Constraint::DEFAULT_GROUP],
         /** @var string[] Which validation groups to trigger in any child objects */
-        protected array $trigger = [Constraint::DEFAULT_GROUP]
+        protected array $trigger = [Constraint::DEFAULT_GROUP],
     ) {
         parent::__construct(groups: $groups);
     }
 
+    /** @return string[] */
     public function getTrigger(): array
     {
         return $this->trigger;

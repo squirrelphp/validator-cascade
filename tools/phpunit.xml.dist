@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/11.2/phpunit.xsd" backupGlobals="false" colors="true" bootstrap="../vendor/autoload.php" cacheDirectory="cache/.phpunit.cache">
+    <coverage includeUncoveredFiles="false"/>
+    <testsuites>
+        <testsuite name="Squirrel Test Suite">
+            <directory>../tests</directory>
+        </testsuite>
+    </testsuites>
+    <source>
+        <include>
+            <directory>../src</directory>
+        </include>
+    </source>
+</phpunit>

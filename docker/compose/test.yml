@@ -1,0 +1,25 @@
+services:
+    test:
+        image: thecodingmachine/php:8.4-v5-cli
+        container_name: squirrel_test
+        tty: true
+        working_dir: /usr/src/app
+        command: ["vendor/bin/phpunit", "--configuration=tools/phpunit.xml.dist", "--colors=always"]
+        volumes:
+            - .:/usr/src/app
+            - "$HOME/.cache/composer:/tmp/composer_cache"
+        environment:
+            # Basic config for CLI commands
+            PHP_INI_ERROR_REPORTING: "E_ALL"
+            PHP_INI_MEMORY_LIMIT: "1g"
+            PHP_INI_MAX_EXECUTION_TIME: 3600
+            # Enable Opcache, disable JIT
+            PHP_INI_OPCACHE__ENABLE_CLI: 1
+            PHP_INI_OPCACHE__MEMORY_CONSUMPTION: 256
+            PHP_INI_OPCACHE__VALIDATE_TIMESTAMPS: 0
+            PHP_INI_OPCACHE__JIT: "disable"
+            # Composer config to use global cache
+            COMPOSER_CACHE_DIR: "/tmp/composer_cache"
+            COMPOSER_ROOT_VERSION: 'dev-master'
+            # Install all composer dependencies before running tests
+            STARTUP_COMMAND_1: composer --no-interaction --no-progress --no-scripts --no-plugins --quiet install
